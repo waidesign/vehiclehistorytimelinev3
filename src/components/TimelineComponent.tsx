@@ -90,7 +90,7 @@ export default function TimelineComponent() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4 mb-4 z-10">
 
         {/* Filter tabs */}
-        <div className="flex flex-wrap items-center gap-1.5">
+        <div data-tour="timeline-filters" className="flex flex-wrap items-center gap-1.5">
           {filterTabs.map((tab) => {
             const isTabActive = filter === tab.id;
             return (
@@ -118,7 +118,7 @@ export default function TimelineComponent() {
         <div className="flex items-center flex-wrap gap-2">
 
           {/* Orientation toggle */}
-          <div className="flex bg-gray-100 rounded-xl p-1">
+          <div data-tour="playback" className="flex bg-gray-100 rounded-xl p-1">
             {(['horizontal', 'vertical'] as const).map((o) => (
               <button
                 key={o}
@@ -161,7 +161,7 @@ export default function TimelineComponent() {
       </div>
 
       {/* Timeline track */}
-      <div className={`flex-1 relative flex flex-col justify-center transition-all duration-200 ${
+      <div data-tour="timeline-track" className={`flex-1 relative flex flex-col justify-center transition-all duration-200 ${
         orientation === 'horizontal' ? 'min-h-[230px]' : 'min-h-[195px]'
       }`}>
 

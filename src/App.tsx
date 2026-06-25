@@ -6,6 +6,7 @@ import MapComponent from './components/MapComponent';
 import TimelineComponent from './components/TimelineComponent';
 import EventDetailPanel from './components/EventDetailPanel';
 import AuctionSpotlight from './components/AuctionSpotlight';
+import TourOverlay from './components/TourOverlay';
 import { decodeVinViaNHTSA, generateSmartJourney, parseRawReportText } from './utils/reportParser';
 import { CARFAX_SAMPLE_DATA } from './data/carfaxSampleData';
 import { useAuth } from './contexts/AuthContext';
@@ -571,7 +572,7 @@ export default function App({ initialTab }: { initialTab?: 'timeline' | 'garage'
             )}
 
             {/* Vehicle stats strip */}
-            <section className="bg-white rounded-2xl p-4 border border-gray-200 shadow-sm flex flex-wrap items-center justify-between gap-4">
+            <section data-tour="vehicle-stats" className="bg-white rounded-2xl p-4 border border-gray-200 shadow-sm flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-1 h-10 bg-blue-600 rounded-full" />
                 <div>
@@ -636,10 +637,10 @@ export default function App({ initialTab }: { initialTab?: 'timeline' | 'garage'
 
             {/* Map + Detail Panel */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:h-[580px] h-auto min-h-0 w-full">
-              <div className="lg:col-span-2 h-[400px] lg:h-full flex flex-col min-h-0 overflow-visible pb-1.5 pr-1.5">
+              <div data-tour="map" className="lg:col-span-2 h-[400px] lg:h-full flex flex-col min-h-0 overflow-visible pb-1.5 pr-1.5">
                 <MapComponent />
               </div>
-              <div className="lg:col-span-1 h-auto lg:h-full min-h-0 flex flex-col overflow-visible pb-1.5 pr-1.5">
+              <div data-tour="event-detail" className="lg:col-span-1 h-auto lg:h-full min-h-0 flex flex-col overflow-visible pb-1.5 pr-1.5">
                 <EventDetailPanel />
               </div>
             </div>
@@ -648,6 +649,8 @@ export default function App({ initialTab }: { initialTab?: 'timeline' | 'garage'
             <section className="h-auto">
               <TimelineComponent />
             </section>
+
+            <TourOverlay isSample={activeVehicle?.id === CARFAX_SAMPLE_DATA.id || activeVehicle?.id === '2T1BU4EE3AC509614'} />
           </div>
         )}
 
